@@ -40,7 +40,7 @@ uint16_t Read_ADC(void){
     HAL_SPI_TransmitReceive(&hspi1 , Transmit_Data , Receive_Data , 3 , 100);
     HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
 
-    uint16_t ADC_Value = (Receive_Data[1] << 8) | Receive_Data[2];
+    uint16_t ADC_Value = ((Receive_Data[1] & 0x3F)| Receive_Data[2]);
 
     return ADC_Value;
 }
