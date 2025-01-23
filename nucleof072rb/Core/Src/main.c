@@ -46,7 +46,10 @@ uint16_t Read_ADC(void){
 }
 
 void Set_PWM_DutyCycle(uint16_t adcValue) {
-    uint16_t compareValue = (adcValue * (102 - 51)) / 1023 + 51;
+    float DutyCycle = (adcValue/ 1023) * (0.10 - 0.05) + 0.05;
+
+    uint32_t CompareValue = (uint32_t)(dutyCycle * 64000);
+
     __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, compareValue);
 }
 
